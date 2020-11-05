@@ -80,7 +80,7 @@ docker-push:
 # find or download controller-gen
 # download controller-gen if necessary
 controller-gen:
-ifeq (, $(shell which controller-gen))
+ifeq (, $(shell command -v controller-gen))
 	@{ \
 	set -e ;\
 	CONTROLLER_GEN_TMP_DIR=$$(mktemp -d) ;\
@@ -91,11 +91,11 @@ ifeq (, $(shell which controller-gen))
 	}
 CONTROLLER_GEN=$(GOBIN)/controller-gen
 else
-CONTROLLER_GEN=$(shell which controller-gen)
+CONTROLLER_GEN=$(shell command -v controller-gen)
 endif
 
 kustomize:
-ifeq (, $(shell which kustomize))
+ifeq (, $(shell command -v kustomize))
 	@{ \
 	set -e ;\
 	KUSTOMIZE_GEN_TMP_DIR=$$(mktemp -d) ;\
@@ -106,7 +106,7 @@ ifeq (, $(shell which kustomize))
 	}
 KUSTOMIZE=$(GOBIN)/kustomize
 else
-KUSTOMIZE=$(shell which kustomize)
+KUSTOMIZE=$(shell command -v kustomize)
 endif
 
 # Generate bundle manifests and metadata, then validate generated files.

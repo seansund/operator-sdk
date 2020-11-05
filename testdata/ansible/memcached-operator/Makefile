@@ -53,7 +53,7 @@ OSOPER   = $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/apple-d
 ARCHOPER = $(shell uname -m )
 
 kustomize:
-ifeq (, $(shell which kustomize 2>/dev/null))
+ifeq (, $(shell command -v kustomize 2>/dev/null))
 	@{ \
 	set -e ;\
 	mkdir -p bin ;\
@@ -61,11 +61,11 @@ ifeq (, $(shell which kustomize 2>/dev/null))
 	}
 KUSTOMIZE=$(realpath ./bin/kustomize)
 else
-KUSTOMIZE=$(shell which kustomize)
+KUSTOMIZE=$(shell command -v kustomize)
 endif
 
 ansible-operator:
-ifeq (, $(shell which ansible-operator 2>/dev/null))
+ifeq (, $(shell command -v ansible-operator 2>/dev/null))
 	@{ \
 	set -e ;\
 	mkdir -p bin ;\
@@ -75,7 +75,7 @@ ifeq (, $(shell which ansible-operator 2>/dev/null))
 	}
 ANSIBLE_OPERATOR=$(realpath ./bin/ansible-operator)
 else
-ANSIBLE_OPERATOR=$(shell which ansible-operator)
+ANSIBLE_OPERATOR=$(shell command -v ansible-operator)
 endif
 
 # Generate bundle manifests and metadata, then validate generated files.

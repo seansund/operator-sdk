@@ -29,7 +29,7 @@ make kustomize
 if [ -f ./bin/kustomize ] ; then
   KUSTOMIZE="$(realpath ./bin/kustomize)"
 else
-  KUSTOMIZE="$(which kustomize)"
+  KUSTOMIZE="$(command -v kustomize)"
 fi
 KUSTOMIZE_PATH=${KUSTOMIZE} TEST_OPERATOR_NAMESPACE=default molecule test -s kind
 

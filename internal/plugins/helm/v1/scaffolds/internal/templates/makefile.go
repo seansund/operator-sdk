@@ -107,7 +107,7 @@ OSOPER   = $(shell uname -s | tr '[:upper:]' '[:lower:]' | sed 's/darwin/apple-d
 ARCHOPER = $(shell uname -m )
 
 kustomize:
-ifeq (, $(shell which kustomize 2>/dev/null))
+ifeq (, $(shell command -v kustomize 2>/dev/null))
 	@{ \
 	set -e ;\
 	mkdir -p bin ;\
@@ -115,11 +115,11 @@ ifeq (, $(shell which kustomize 2>/dev/null))
 	}
 KUSTOMIZE=$(realpath ./bin/kustomize)
 else
-KUSTOMIZE=$(shell which kustomize)
+KUSTOMIZE=$(shell command -v kustomize)
 endif
 
 helm-operator:
-ifeq (, $(shell which helm-operator 2>/dev/null))
+ifeq (, $(shell command -v helm-operator 2>/dev/null))
 	@{ \
 	set -e ;\
 	mkdir -p bin ;\
@@ -129,6 +129,6 @@ ifeq (, $(shell which helm-operator 2>/dev/null))
 	}
 HELM_OPERATOR=$(realpath ./bin/helm-operator)
 else
-HELM_OPERATOR=$(shell which helm-operator)
+HELM_OPERATOR=$(shell command -v helm-operator)
 endif
 `
